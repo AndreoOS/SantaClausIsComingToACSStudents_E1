@@ -6,8 +6,11 @@ Starting audit...
 [ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\Database.java:22:21: Parameter giftList should be final. [FinalParameters]
 [ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\Database.java:22:42: Parameter cityList should be final. [FinalParameters]
 [ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\Database.java:22:65: Parameter annualChanges should be final. [FinalParameters]
-[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\DataManagement.java:11:5: Class 'DataManagement' looks like designed for extension (can be subclassed), but the method 'readAllData' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'DataManagement' final or making the method 'readAllData' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
-[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\DataManagement.java:11:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\DataManagement.java:12:9: 'for' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\DataManagement.java:15:5: Class 'DataManagement' looks like designed for extension (can be subclassed), but the method 'readAllData' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'DataManagement' final or making the method 'readAllData' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\DataManagement.java:15:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\data\DataManagement.java:16:9: 'for' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\main\TestingJSON.java:5:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\main\TestingJSON.java:6:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\main\TestingJSON.java:6:29: Parameter args should be final. [FinalParameters]
 Audit done.
-Checkstyle ends with 10 errors.
+Checkstyle ends with 13 errors.
