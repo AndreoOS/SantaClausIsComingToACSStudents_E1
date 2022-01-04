@@ -1,7 +1,8 @@
-package data;
+package dataprocessing;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import common.Constants;
+import data.Database;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,6 @@ public class DataManagement {
             try {
                 db = new ObjectMapper().readerFor(Database.class).readValue(
                         new File("tests/test" + i + Constants.FILE_EXTENSION));
-                System.out.println(db.getInitialData().getChildren().get(0).getAge());
             } catch (IOException e) {
                 e.printStackTrace();
             }

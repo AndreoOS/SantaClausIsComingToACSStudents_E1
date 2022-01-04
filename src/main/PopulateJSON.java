@@ -1,6 +1,6 @@
 package main;
 
-import data.DataManagement;
+import dataprocessing.DataManagement;
 
 public class PopulateJSON {
     public static void main(String[] args) {

@@ -2,6 +2,7 @@ package data;
 
 import entities.Child;
 import entities.Gift;
+import enums.AgeCategory;
 import enums.Cities;
 
 import java.util.List;
@@ -52,4 +53,20 @@ public class Database {
     public void setInitialData(InitialData initialData) {
         this.initialData = initialData;
     }
+
+    public void removeYoungAdults() {
+        initialData.getChildren().removeIf(child -> child.getAgeCategory().equals(AgeCategory.YOUNG_ADULT));
+    }
+
+    public Double getSumOfAverage() {
+        Double sum = 0.0;
+
+        for(Child child : initialData.sortChildrenById()) {
+            sum = sum + child.getAverageScore();
+        }
+        return sum;
+    }
+
+
+
 }
