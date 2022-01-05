@@ -82,6 +82,77 @@ public class GiftList {
                 return Double.compare(o2.getPrice(), o1.getPrice());
             }
         });
+    }
 
+    public List<Gift> getSpecifiedList(Category category) {
+        switch (category) {
+            case BOARD_GAMES -> {
+                return boardGames;
+            }
+            case TECHNOLOGY -> {
+                return tech;
+            }
+            case TOYS -> {
+                return toys;
+            }
+            case BOOKS -> {
+                return books;
+            }
+            case CLOTHES -> {
+                return clothes;
+            }
+            case SWEETS -> {
+                return sweets;
+            }
+        }
+        return null;
+    }
+
+    public List<Gift> getBoardGames() {
+        return boardGames;
+    }
+
+    public void setBoardGames(List<Gift> boardGames) {
+        this.boardGames = boardGames;
+    }
+
+    public List<Gift> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Gift> books) {
+        this.books = books;
+    }
+
+    public List<Gift> getClothes() {
+        return clothes;
+    }
+
+    public void setClothes(List<Gift> clothes) {
+        this.clothes = clothes;
+    }
+
+    public List<Gift> getSweets() {
+        return sweets;
+    }
+
+    public void setSweets(List<Gift> sweets) {
+        this.sweets = sweets;
+    }
+
+    public List<Gift> getTech() {
+        return tech;
+    }
+
+    public void setTech(List<Gift> tech) {
+        this.tech = tech;
+    }
+
+    public List<Gift> getToys() {
+        return toys;
+    }
+
+    public void setToys(List<Gift> toys) {
+        this.toys = toys;
     }
 }

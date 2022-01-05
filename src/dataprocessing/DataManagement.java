@@ -18,16 +18,16 @@ public class DataManagement {
 
     public void simulateData(Database db, OutputDatabase odb, GiftList giftList) {
         Simulation sim = new Simulation(db, giftList);
-        sim.InitialYear(odb);
+        sim.initialYear(odb);
     }
 
     public void readAllData() {
-        OutputDatabase odb = new OutputDatabase();
         for (int i = 1; i <= Constants.TESTS_NUMBER; i++) {
             Database db = new Database();
             try {
                 db = new ObjectMapper().readerFor(Database.class).readValue(
                         new File("tests/test" + i + Constants.FILE_EXTENSION));
+                OutputDatabase odb = new OutputDatabase();
                 GiftList giftList = new GiftList();
                 giftList.populateGiftList(db.getInitialData().getSantaGiftsList());
                 simulateData(db, odb, giftList);

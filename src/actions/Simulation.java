@@ -6,7 +6,9 @@ import data.OutputDatabase;
 import dataprocessing.CalculateScoreStrategy;
 import entities.Child;
 import entities.Children;
+import entities.Gift;
 import entities.OutputChild;
+import enums.Category;
 import factory.CalculateScoreStrategyFactory;
 
 import java.util.ArrayList;
@@ -22,7 +24,12 @@ public class Simulation {
         this.giftList = giftList;
     }
 
-    public void InitialYear(OutputDatabase odb) {
+    public void simulateYears(OutputDatabase odb) {
+
+
+    }
+
+    public void initialYear(OutputDatabase odb) {
         for(Child child : database.getInitialData().getChildren()) {
             child.setAgeCategory();
             child.getNiceScoreHistory().add(child.getNiceScore());
@@ -38,12 +45,38 @@ public class Simulation {
         }
         database.removeYoungAdults();
         // bag cadourile la copii
+        giveGifts();
         // adaug copii in lista si lista in output database
         Children giftedChildren = new Children();
         for (Child child : database.getInitialData().getChildren()) {
             giftedChildren.getChildren().add(new OutputChild(child));
         }
         odb.getAnnualChildren().add(giftedChildren);
+    }
+
+    private void giveGifts() {
+        Gift assignedGift = null;
+        for (Child child : database.getInitialData().getChildren()) {
+            Double budget = child.getAssignedBudget();
+            for (Category giftCategory : child.getGiftsPreferences()) {
+                assignedGift = null;
+                for (Gift foundGift : giftList.getSpecifiedList(giftCategory)) {
+                    if (assignedGift != null) {
+                        if(assignedGift.getPrice().compareTo(foundGift.getPrice()) > 0) {
+                            assignedGift = foundGift;
+                        }
+                    } else {
+                        assignedGift = foundGift;
+                    }
+                }
+                if (assignedGift != null) {
+                    if (budget > assignedGift.getPrice()) {
+                        child.getReceivedGifts().add(assignedGift);
+                        budget = budget - assignedGift.getPrice();
+                    }
+                }
+            }
+       }
     }
 
 }

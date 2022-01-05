@@ -60,7 +60,6 @@ public class Database {
 
     public Double getSumOfAverage() {
         Double sum = 0.0;
-
         for(Child child : initialData.sortChildrenById()) {
             sum = sum + child.getAverageScore();
         }
