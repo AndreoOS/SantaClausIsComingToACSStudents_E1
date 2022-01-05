@@ -1,22 +1,23 @@
 package data;
 
 import entities.Child;
+import entities.Children;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OutputDatabase {
-    private List<List<Child>> listAllGiftedChildren;
+    private List<Children> annualChildren;
 
     public OutputDatabase() {
-        listAllGiftedChildren = new ArrayList<>();
+        annualChildren = new ArrayList<>();
     }
 
-    public List<List<Child>> getListAllGiftedChildren() {
-        return listAllGiftedChildren;
+    public List<Children> getAnnualChildren() {
+        return annualChildren;
     }
 
-    public void setListAllGiftedChildren(List<List<Child>> listAllGiftedChildren) {
-        this.listAllGiftedChildren = listAllGiftedChildren;
+    public void setAnnualChildren(List<Children> annualChildren) {
+        this.annualChildren = annualChildren;
     }
 }

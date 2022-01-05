@@ -2,6 +2,7 @@ package data;
 
 import entities.Child;
 import entities.Gift;
+import enums.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,4 +47,17 @@ public class InitialData {
             }
         }).toList();
     }
+
+//    public void giveGifts() {
+//        for (Child child : children) {
+//            Double budget = child.getAssignedBudget();
+//            while(budget > 0) {
+//                for (Category giftCategory : child.getGiftsPreferences()) {
+//                    if (santaGiftsList.stream().anyMatch(gift -> gift.getCategory().equals(giftCategory))) {
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import enums.AgeCategory;
 import enums.Category;
 import enums.Cities;
@@ -9,10 +10,10 @@ import java.util.List;
 
 public class Child {
     private Integer id;
-    private String firstName;
     private String lastName;
-    private Integer age;
+    private String firstName;
     private Cities city;
+    private Integer age;
     private Double niceScore;
     private List<Category> giftsPreferences;
     private AgeCategory ageCategory;
