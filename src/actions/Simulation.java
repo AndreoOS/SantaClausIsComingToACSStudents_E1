@@ -32,8 +32,8 @@ public class Simulation {
     public void initialRound(OutputDatabase odb) {
         setNiceScoreHistory();
         setAgeCategories();
-        setAssignedBudgets();
         database.removeYoungAdults();
+        setAssignedBudgets();
         // bag cadourile la copii
         giveGifts();
         // adaug copii in lista si lista in output database
@@ -42,6 +42,7 @@ public class Simulation {
             giftedChildren.getChildren().add(new OutputChild(child));
         }
         odb.getAnnualChildren().add(giftedChildren);
+        removeGifts();
     }
 
     private void simulateYears(OutputDatabase odb) {
@@ -50,7 +51,6 @@ public class Simulation {
                 child.setAge(child.getAge() + 1);
                 setAgeCategories();
             }
-            database.removeYoungAdults();
             AnnualChanges annualChange = database.getAnnualChanges().get(i - 1);
             annualChange.addNewChildren(database);
             annualChange.updateChildren(database);
@@ -64,6 +64,8 @@ public class Simulation {
                 giftedChildren.getChildren().add(new OutputChild(child));
             }
             odb.getAnnualChildren().add(giftedChildren);
+            // stergem gifturile
+            removeGifts();
         }
     }
 
@@ -83,7 +85,7 @@ public class Simulation {
                     }
                 }
                 if (assignedGift != null) {
-                    if (budget.compareTo(assignedGift.getPrice()) > 0
+                    if (Double.compare(budget, assignedGift.getPrice()) > 0
                             && !child.getReceivedGifts().contains(assignedGift)) {
                         child.getReceivedGifts().add(assignedGift);
                         budget = budget - assignedGift.getPrice();
@@ -91,6 +93,12 @@ public class Simulation {
                 }
             }
        }
+    }
+
+    private void removeGifts() {
+        for (Child child : database.getInitialData().getChildren()) {
+            child.getReceivedGifts().clear();
+        }
     }
 
     private void setAgeCategories() {

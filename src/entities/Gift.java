@@ -7,6 +7,15 @@ public class Gift {
     private Double price;
     private Category category;
 
+    public Gift() {
+    }
+
+    public Gift(Gift gift) {
+        productName = gift.productName;
+        price = gift.price;
+        category = gift.category;
+    }
+
     public String getProductName() {
         return productName;
     }

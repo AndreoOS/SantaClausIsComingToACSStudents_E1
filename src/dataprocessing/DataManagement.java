@@ -31,23 +31,11 @@ public class DataManagement {
                 GiftList giftList = new GiftList();
                 giftList.populateGiftList(db.getInitialData().getSantaGiftsList());
                 simulateData(db, odb, giftList);
-                //writeAllData(odb, i);
+                writeAllData(odb, i);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-//        Database db = new Database();
-//        try {
-//            db = new ObjectMapper().readerFor(Database.class).readValue(
-//                    new File("tests/test" + 5 + Constants.FILE_EXTENSION));
-//            OutputDatabase odb = new OutputDatabase();
-//            GiftList giftList = new GiftList();
-//            giftList.populateGiftList(db.getInitialData().getSantaGiftsList());
-//            simulateData(db, odb, giftList);
-//            writeAllData(odb, 5);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void writeAllData(OutputDatabase odb, Integer testNumber) {

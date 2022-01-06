@@ -46,7 +46,7 @@ public class Child {
     public void setAgeCategory() {
         if (age < 5) {
             this.ageCategory = AgeCategory.BABY;
-        } else if (age <= 12) {
+        } else if (age < 12) {
             this.ageCategory = AgeCategory.KID;
         } else if (age <= 18) {
             this.ageCategory = AgeCategory.TEEN;

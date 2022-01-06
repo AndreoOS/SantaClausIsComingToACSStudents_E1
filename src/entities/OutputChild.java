@@ -25,11 +25,11 @@ public class OutputChild {
         firstName = child.getFirstName();
         city = child.getCity();
         age = child.getAge();
-        giftsPreferences = child.getGiftsPreferences();
+        giftsPreferences = cloneGiftPreferences(child.getGiftsPreferences()); // clone
         averageScore = child.getAverageScore();
-        niceScoreHistory = child.getNiceScoreHistory();
+        niceScoreHistory = cloneNiceScoreHistory(child.getNiceScoreHistory()); // clone
         assignedBudget = child.getAssignedBudget();
-        receivedGifts = child.getReceivedGifts();
+        receivedGifts = cloneReceivedGifts(child.getReceivedGifts());
     }
 
     public Integer getId() {
@@ -110,5 +110,21 @@ public class OutputChild {
 
     public void setReceivedGifts(ArrayList<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
+    }
+
+    private List<Gift> cloneReceivedGifts(List<Gift> receivedGifts) {
+        List<Gift> clone = new ArrayList<>();
+        for (Gift gift : receivedGifts) {
+            clone.add(new Gift(gift));
+        }
+        return clone;
+    }
+
+    private List<Category> cloneGiftPreferences(List<Category> giftPreferences) {
+        return new ArrayList<>(giftPreferences);
+    }
+
+    private List<Double> cloneNiceScoreHistory(List<Double> niceScoreHistory) {
+        return new ArrayList<>(niceScoreHistory);
     }
 }

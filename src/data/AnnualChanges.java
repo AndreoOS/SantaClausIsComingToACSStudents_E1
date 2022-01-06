@@ -65,10 +65,8 @@ public class AnnualChanges {
 
     public void addNewChildren(Database database) {
         for (Child newChild : newChildren) {
-            newChild.setAgeCategory();
-            if (newChild.getAgeCategory().equals(AgeCategory.YOUNG_ADULT)) {
-                database.getInitialData().getChildren().add(newChild);
-            }
+            newChild.getNiceScoreHistory().add(newChild.getNiceScore());
+            database.getInitialData().getChildren().add(newChild);
         }
     }
 
@@ -80,15 +78,15 @@ public class AnnualChanges {
                     foundChild.setNiceScore(childUpdate.getNiceScore());
                     foundChild.getNiceScoreHistory().add(childUpdate.getNiceScore());
                 }
-                if (childUpdate.getGiftsPreferences() != null) {
+                if (childUpdate.getGiftsPreferences().size() != 0) {
                     for (Category newCategory : childUpdate.getGiftsPreferences()) {
-                        if (foundChild.getGiftsPreferences().contains(newCategory)) {
-                            foundChild.getGiftsPreferences().remove(newCategory);
-                        }
+                        foundChild.getGiftsPreferences().remove(newCategory);
                     }
                     List<Category> newGiftPreferences = Stream.concat(childUpdate.getGiftsPreferences().stream(),
                             foundChild.getGiftsPreferences().stream()).collect(Collectors.toList());
+                    newGiftPreferences = newGiftPreferences.stream().distinct().collect(Collectors.toList());
                     foundChild.setGiftsPreferences(newGiftPreferences);
+
                 }
             }
         }

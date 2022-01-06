@@ -14,7 +14,7 @@ public class TeenScoreStrategy implements CalculateScoreStrategy{
         Double average = 0.0;
         Integer weight = 0;
         for(int i = 0; i < child.getNiceScoreHistory().size(); i++) {
-            average = (i + 1) * child.getNiceScoreHistory().get(i);
+            average = average + (i + 1) * child.getNiceScoreHistory().get(i);
             weight = weight + (i + 1);
         }
         average = average / weight;
