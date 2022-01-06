@@ -3,6 +3,8 @@ package entities;
 import enums.Category;
 import enums.Cities;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OutputChild {
@@ -11,7 +13,7 @@ public class OutputChild {
     private String firstName;
     private Cities city;
     private Integer age;
-    private List<Category> giftsPreference;
+    private List<Category> giftsPreferences;
     private Double averageScore;
     private List<Double> niceScoreHistory;
     private Double assignedBudget;
@@ -23,7 +25,7 @@ public class OutputChild {
         firstName = child.getFirstName();
         city = child.getCity();
         age = child.getAge();
-        giftsPreference = child.getGiftsPreferences();
+        giftsPreferences = child.getGiftsPreferences();
         averageScore = child.getAverageScore();
         niceScoreHistory = child.getNiceScoreHistory();
         assignedBudget = child.getAssignedBudget();
@@ -70,12 +72,12 @@ public class OutputChild {
         this.age = age;
     }
 
-    public List<Category> getGiftsPreference() {
-        return giftsPreference;
+    public List<Category> getGiftsPreferences() {
+        return giftsPreferences;
     }
 
-    public void setGiftsPreference(List<Category> giftsPreference) {
-        this.giftsPreference = giftsPreference;
+    public void setGiftsPreferences(List<Category> giftsPreferences) {
+        this.giftsPreferences = giftsPreferences;
     }
 
     public Double getAverageScore() {
@@ -106,7 +108,7 @@ public class OutputChild {
         return receivedGifts;
     }
 
-    public void setReceivedGifts(List<Gift> receivedGifts) {
+    public void setReceivedGifts(ArrayList<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
     }
 }

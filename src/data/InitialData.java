@@ -47,4 +47,13 @@ public class InitialData {
             }
         }).toList();
     }
+
+    public Child getChildWithId(Integer id) {
+        for (Child child : children) {
+            if (child.getId().equals(id)) {
+                return child;
+            }
+        }
+        return null;
+    }
 }

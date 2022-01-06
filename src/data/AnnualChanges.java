@@ -1,11 +1,17 @@
 package data;
 
+import dataprocessing.CalculateScoreStrategy;
 import entities.Child;
 import entities.ChildUpdate;
 import entities.Gift;
+import enums.AgeCategory;
 import enums.Category;
+import factory.CalculateScoreStrategyFactory;
 
+import javax.xml.crypto.Data;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AnnualChanges {
     private Double newSantaBudget;
@@ -56,4 +62,40 @@ public class AnnualChanges {
     public void setNewChildren(List<Child> newChildren) {
         this.newChildren = newChildren;
     }
+
+    public void addNewChildren(Database database) {
+        for (Child newChild : newChildren) {
+            newChild.setAgeCategory();
+            if (newChild.getAgeCategory().equals(AgeCategory.YOUNG_ADULT)) {
+                database.getInitialData().getChildren().add(newChild);
+            }
+        }
+    }
+
+    public void updateChildren(Database database) {
+        for (ChildUpdate childUpdate : childrenUpdates) {
+            Child foundChild = database.getInitialData().getChildWithId(childUpdate.getId());
+            if (foundChild != null) {
+                if (childUpdate.getNiceScore() != null) {
+                    foundChild.setNiceScore(childUpdate.getNiceScore());
+                    foundChild.getNiceScoreHistory().add(childUpdate.getNiceScore());
+                }
+                if (childUpdate.getGiftsPreferences() != null) {
+                    for (Category newCategory : childUpdate.getGiftsPreferences()) {
+                        if (foundChild.getGiftsPreferences().contains(newCategory)) {
+                            foundChild.getGiftsPreferences().remove(newCategory);
+                        }
+                    }
+                    List<Category> newGiftPreferences = Stream.concat(childUpdate.getGiftsPreferences().stream(),
+                            foundChild.getGiftsPreferences().stream()).collect(Collectors.toList());
+                    foundChild.setGiftsPreferences(newGiftPreferences);
+                }
+            }
+        }
+    }
+
+    public void updateBudget(Database database) {
+        database.setSantaBudget(newSantaBudget);
+    }
+
 }

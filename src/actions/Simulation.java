@@ -1,5 +1,7 @@
 package actions;
 
+import common.Constants;
+import data.AnnualChanges;
 import data.Database;
 import data.GiftList;
 import data.OutputDatabase;
@@ -8,11 +10,9 @@ import entities.Child;
 import entities.Children;
 import entities.Gift;
 import entities.OutputChild;
+import enums.AgeCategory;
 import enums.Category;
 import factory.CalculateScoreStrategyFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Simulation {
     private Database database;
@@ -24,25 +24,15 @@ public class Simulation {
         this.giftList = giftList;
     }
 
-    public void simulateYears(OutputDatabase odb) {
-
-
+    public void simulateAll(OutputDatabase odb) {
+        initialRound(odb);
+        simulateYears(odb);
     }
 
-    public void initialYear(OutputDatabase odb) {
-        for(Child child : database.getInitialData().getChildren()) {
-            child.setAgeCategory();
-            child.getNiceScoreHistory().add(child.getNiceScore());
-            CalculateScoreStrategy strategy = CalculateScoreStrategyFactory
-                    .createStrategy(child.getAgeCategory(), child);
-            if (strategy != null) {
-                child.setAverageScore(strategy.getScore());
-            }
-        }
-        budgetUnit = database.getSantaBudget() / database.getSumOfAverage();
-        for (Child child : database.getInitialData().getChildren()) {
-            child.setAssignedBudget(budgetUnit * child.getAverageScore());
-        }
+    public void initialRound(OutputDatabase odb) {
+        setNiceScoreHistory();
+        setAgeCategories();
+        setAssignedBudgets();
         database.removeYoungAdults();
         // bag cadourile la copii
         giveGifts();
@@ -54,8 +44,31 @@ public class Simulation {
         odb.getAnnualChildren().add(giftedChildren);
     }
 
+    private void simulateYears(OutputDatabase odb) {
+        for (int i = 1; i <= database.getNumberOfYears(); i++) {
+            for (Child child : database.getInitialData().getChildren()) {
+                child.setAge(child.getAge() + 1);
+                setAgeCategories();
+            }
+            database.removeYoungAdults();
+            AnnualChanges annualChange = database.getAnnualChanges().get(i - 1);
+            annualChange.addNewChildren(database);
+            annualChange.updateChildren(database);
+            annualChange.updateBudget(database);
+            setAgeCategories();
+            database.removeYoungAdults();
+            setAssignedBudgets();
+            giveGifts();
+            Children giftedChildren = new Children();
+            for (Child child : database.getInitialData().getChildren()) {
+                giftedChildren.getChildren().add(new OutputChild(child));
+            }
+            odb.getAnnualChildren().add(giftedChildren);
+        }
+    }
+
     private void giveGifts() {
-        Gift assignedGift = null;
+        Gift assignedGift;
         for (Child child : database.getInitialData().getChildren()) {
             Double budget = child.getAssignedBudget();
             for (Category giftCategory : child.getGiftsPreferences()) {
@@ -70,13 +83,38 @@ public class Simulation {
                     }
                 }
                 if (assignedGift != null) {
-                    if (budget > assignedGift.getPrice()) {
+                    if (budget.compareTo(assignedGift.getPrice()) > 0
+                            && !child.getReceivedGifts().contains(assignedGift)) {
                         child.getReceivedGifts().add(assignedGift);
                         budget = budget - assignedGift.getPrice();
                     }
                 }
             }
        }
+    }
+
+    private void setAgeCategories() {
+        for(Child child : database.getInitialData().getChildren()) {
+            child.setAgeCategory();
+            CalculateScoreStrategy strategy = CalculateScoreStrategyFactory
+                    .createStrategy(child.getAgeCategory(), child);
+            if (strategy != null) {
+                child.setAverageScore(strategy.getScore());
+            }
+        }
+    }
+
+    private void setAssignedBudgets() {
+        budgetUnit = database.getSantaBudget() / database.getSumOfAverage();
+        for (Child child : database.getInitialData().getChildren()) {
+            child.setAssignedBudget(budgetUnit * child.getAverageScore());
+        }
+    }
+
+    private void setNiceScoreHistory() {
+        for (Child child : database.getInitialData().getChildren()) {
+            child.getNiceScoreHistory().add(child.getNiceScore());
+        }
     }
 
 }
