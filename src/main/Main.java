@@ -18,7 +18,7 @@ public final class Main {
      */
     public static void main(final String[] args) {
         DataManagement dm = new DataManagement();
-        dm.readAllData();
+        dm.readAllDataAndSimulate();
         Checker.calculateScore();
     }
 }

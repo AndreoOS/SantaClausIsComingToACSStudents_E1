@@ -2,10 +2,10 @@ package dataprocessing;
 
 import entities.Child;
 
-public class YoungAdultScoreStrategy implements CalculateScoreStrategy{
+public final class YoungAdultScoreStrategy implements CalculateScoreStrategy {
     private Child child;
 
-    public YoungAdultScoreStrategy(Child child) {
+    public YoungAdultScoreStrategy(final Child child) {
         this.child = child;
     }
 

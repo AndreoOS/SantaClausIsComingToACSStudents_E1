@@ -1,13 +1,12 @@
 package data;
 
 import entities.Child;
-import entities.Gift;
 import enums.AgeCategory;
-import enums.Cities;
 
 import java.util.List;
 
-public class Database {
+public final class Database {
+    private static Database database = null;
     private Integer numberOfYears;
     private Double santaBudget;
     private InitialData initialData;
@@ -16,7 +15,29 @@ public class Database {
     public Database() {
         // constructor for json
     }
-    public Database(Integer numberOfYears, Double santaBudget, List<AnnualChanges> annualChanges) {
+
+    public static Database getDatabase() {
+        return database;
+    }
+
+    public static void setDatabase(final Database database) {
+        Database.database = database;
+    }
+
+    /**
+     * Lazy singleton implementation of database
+     * @return instance of database
+     */
+    public static Database getInstance() {
+        if (database == null) {
+            database = new Database();
+        }
+        return database;
+    }
+
+
+    public Database(final Integer numberOfYears, final Double santaBudget,
+                    final List<AnnualChanges> annualChanges) {
         this.numberOfYears = numberOfYears;
         this.santaBudget = santaBudget;
         this.annualChanges = annualChanges;
@@ -26,7 +47,7 @@ public class Database {
         return numberOfYears;
     }
 
-    public void setNumberOfYears(Integer numberOfYears) {
+    public void setNumberOfYears(final Integer numberOfYears) {
         this.numberOfYears = numberOfYears;
     }
 
@@ -34,7 +55,7 @@ public class Database {
         return santaBudget;
     }
 
-    public void setSantaBudget(Double santaBudget) {
+    public void setSantaBudget(final Double santaBudget) {
         this.santaBudget = santaBudget;
     }
 
@@ -42,7 +63,7 @@ public class Database {
         return annualChanges;
     }
 
-    public void setAnnualChanges(List<AnnualChanges> annualChanges) {
+    public void setAnnualChanges(final List<AnnualChanges> annualChanges) {
         this.annualChanges = annualChanges;
     }
 
@@ -50,17 +71,25 @@ public class Database {
         return initialData;
     }
 
-    public void setInitialData(InitialData initialData) {
+    public void setInitialData(final InitialData initialData) {
         this.initialData = initialData;
     }
 
+    /**
+     * The method removes children from the database if the age category is young adult
+     */
     public void removeYoungAdults() {
-        initialData.getChildren().removeIf(child -> child.getAgeCategory().equals(AgeCategory.YOUNG_ADULT));
+        initialData.getChildren()
+                .removeIf(child -> child.getAgeCategory().equals(AgeCategory.YOUNG_ADULT));
     }
 
+    /**
+     * Method returns the sum of all the average scores for all the children sorted by id
+     * @return sum of average scores
+     */
     public Double getSumOfAverage() {
         Double sum = 0.0;
-        for(Child child : initialData.sortChildrenById()) {
+        for (Child child : initialData.sortChildrenById()) {
             sum = sum + child.getAverageScore();
         }
         return sum;

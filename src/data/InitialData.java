@@ -2,12 +2,11 @@ package data;
 
 import entities.Child;
 import entities.Gift;
-import enums.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitialData {
+public final class InitialData {
     private List<Child> children;
     private List<Gift> santaGiftsList;
 
@@ -17,7 +16,7 @@ public class InitialData {
         santaGiftsList = new ArrayList<>();
     }
 
-    public InitialData(List<Child> children, List<Gift> santaGiftsList) {
+    public InitialData(final List<Child> children, final List<Gift> santaGiftsList) {
         this.children = children;
         this.santaGiftsList = santaGiftsList;
     }
@@ -26,7 +25,7 @@ public class InitialData {
         return children;
     }
 
-    public void setChildren(List<Child> children) {
+    public void setChildren(final List<Child> children) {
         this.children = children;
     }
 
@@ -34,10 +33,14 @@ public class InitialData {
         return santaGiftsList;
     }
 
-    public void setSantaGiftsList(List<Gift> santaGiftsList) {
+    public void setSantaGiftsList(final List<Gift> santaGiftsList) {
         this.santaGiftsList = santaGiftsList;
     }
 
+    /**
+     * Method sorts the list of children based on id
+     * @return sorted list
+     */
     public List<Child> sortChildrenById() {
         return children.stream().sorted((o1, o2) -> {
             if (o1.getId().compareTo(o2.getId()) > 0) {
@@ -48,7 +51,12 @@ public class InitialData {
         }).toList();
     }
 
-    public Child getChildWithId(Integer id) {
+    /**
+     * Returns child with specific id
+     * @param id integer
+     * @return wanted child
+     */
+    public Child getChildWithId(final Integer id) {
         for (Child child : children) {
             if (child.getId().equals(id)) {
                 return child;

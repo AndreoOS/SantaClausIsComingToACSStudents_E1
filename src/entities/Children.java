@@ -3,8 +3,8 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Children {
-    List<OutputChild> children;
+public final class Children {
+    private List<OutputChild> children;
 
     public Children() {
         children = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Children {
         return children;
     }
 
-    public void setChildren(List<OutputChild> children) {
+    public void setChildren(final List<OutputChild> children) {
         this.children = children;
     }
 }

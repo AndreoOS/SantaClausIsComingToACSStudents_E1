@@ -1,11 +1,25 @@
 package factory;
 
-import dataprocessing.*;
+import dataprocessing.BabyScoreStrategy;
+import dataprocessing.CalculateScoreStrategy;
+import dataprocessing.KidScoreStrategy;
+import dataprocessing.TeenScoreStrategy;
+import dataprocessing.YoungAdultScoreStrategy;
 import entities.Child;
 import enums.AgeCategory;
 
-public class CalculateScoreStrategyFactory {
-    public static CalculateScoreStrategy createStrategy(AgeCategory ageCategory, Child child) {
+public final class CalculateScoreStrategyFactory {
+    private CalculateScoreStrategyFactory() {
+    }
+
+    /**
+     * Method creates a strategy based on a certain child
+     * @param ageCategory Category of child
+     * @param child Child
+     * @return a strategy which calculates the average score
+     */
+    public static CalculateScoreStrategy createStrategy(final AgeCategory ageCategory,
+                                                        final Child child) {
         switch (ageCategory) {
             case BABY -> {
                 return new BabyScoreStrategy(child);

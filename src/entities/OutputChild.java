@@ -3,11 +3,10 @@ package entities;
 import enums.Category;
 import enums.Cities;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutputChild {
+public final class OutputChild {
     private Integer id;
     private String lastName;
     private String firstName;
@@ -19,7 +18,7 @@ public class OutputChild {
     private Double assignedBudget;
     private List<Gift> receivedGifts;
 
-    public OutputChild(Child child) {
+    public OutputChild(final Child child) {
         id = child.getId();
         lastName = child.getLastName();
         firstName = child.getFirstName();
@@ -36,7 +35,7 @@ public class OutputChild {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -44,7 +43,7 @@ public class OutputChild {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -52,7 +51,7 @@ public class OutputChild {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -60,7 +59,7 @@ public class OutputChild {
         return city;
     }
 
-    public void setCity(Cities city) {
+    public void setCity(final Cities city) {
         this.city = city;
     }
 
@@ -68,7 +67,7 @@ public class OutputChild {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(final Integer age) {
         this.age = age;
     }
 
@@ -76,7 +75,7 @@ public class OutputChild {
         return giftsPreferences;
     }
 
-    public void setGiftsPreferences(List<Category> giftsPreferences) {
+    public void setGiftsPreferences(final List<Category> giftsPreferences) {
         this.giftsPreferences = giftsPreferences;
     }
 
@@ -84,7 +83,7 @@ public class OutputChild {
         return averageScore;
     }
 
-    public void setAverageScore(Double averageScore) {
+    public void setAverageScore(final Double averageScore) {
         this.averageScore = averageScore;
     }
 
@@ -92,7 +91,7 @@ public class OutputChild {
         return niceScoreHistory;
     }
 
-    public void setNiceScoreHistory(List<Double> niceScoreHistory) {
+    public void setNiceScoreHistory(final List<Double> niceScoreHistory) {
         this.niceScoreHistory = niceScoreHistory;
     }
 
@@ -100,7 +99,7 @@ public class OutputChild {
         return assignedBudget;
     }
 
-    public void setAssignedBudget(Double assignedBudget) {
+    public void setAssignedBudget(final Double assignedBudget) {
         this.assignedBudget = assignedBudget;
     }
 
@@ -108,23 +107,23 @@ public class OutputChild {
         return receivedGifts;
     }
 
-    public void setReceivedGifts(ArrayList<Gift> receivedGifts) {
+    public void setReceivedGifts(final ArrayList<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
     }
 
-    private List<Gift> cloneReceivedGifts(List<Gift> receivedGifts) {
+    private List<Gift> cloneReceivedGifts(final List<Gift> theReceivedGifts) {
         List<Gift> clone = new ArrayList<>();
-        for (Gift gift : receivedGifts) {
+        for (Gift gift : theReceivedGifts) {
             clone.add(new Gift(gift));
         }
         return clone;
     }
 
-    private List<Category> cloneGiftPreferences(List<Category> giftPreferences) {
+    private List<Category> cloneGiftPreferences(final List<Category> giftPreferences) {
         return new ArrayList<>(giftPreferences);
     }
 
-    private List<Double> cloneNiceScoreHistory(List<Double> niceScoreHistory) {
-        return new ArrayList<>(niceScoreHistory);
+    private List<Double> cloneNiceScoreHistory(final List<Double> theNiceScoreHistory) {
+        return new ArrayList<>(theNiceScoreHistory);
     }
 }

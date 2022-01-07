@@ -4,16 +4,15 @@ import entities.Gift;
 import enums.Category;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class GiftList {
-    List<Gift> boardGames;
-    List<Gift> books;
-    List<Gift> clothes;
-    List<Gift> sweets;
-    List<Gift> tech;
-    List<Gift> toys;
+public final class GiftList {
+    private List<Gift> boardGames;
+    private List<Gift> books;
+    private List<Gift> clothes;
+    private List<Gift> sweets;
+    private List<Gift> tech;
+    private List<Gift> toys;
 
     public GiftList() {
         boardGames = new ArrayList<>();
@@ -24,7 +23,11 @@ public class GiftList {
         toys = new ArrayList<>();
     }
 
-    public void populateGiftList(List<Gift> santaGiftList) {
+    /**
+     * Method divides the gifts into sub-lists according to their category
+     * @param santaGiftList Unsorted list of all gifts
+     */
+    public void populateGiftList(final List<Gift> santaGiftList) {
         for (Gift gift : santaGiftList) {
             if (gift.getCategory().equals(Category.BOARD_GAMES)) {
                 boardGames.add(gift);
@@ -32,59 +35,28 @@ public class GiftList {
                 books.add(gift);
             } else if (gift.getCategory().equals(Category.CLOTHES)) {
                 clothes.add(gift);
-            } else if (gift.getCategory().equals(Category.SWEETS)){
+            } else if (gift.getCategory().equals(Category.SWEETS)) {
                 sweets.add(gift);
-            } else if (gift.getCategory().equals(Category.TECHNOLOGY)){
+            } else if (gift.getCategory().equals(Category.TECHNOLOGY)) {
                 tech.add(gift);
             } else if (gift.getCategory().equals(Category.TOYS)) {
                 toys.add(gift);
             }
         }
-        boardGames.sort((o1, o2) -> {
-            if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            } else {
-                return Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
-        books.sort((o1, o2) -> {
-            if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            } else {
-                return Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
-        clothes.sort((o1, o2) -> {
-            if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            } else {
-                return Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
-        sweets.sort((o1, o2) -> {
-            if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            } else {
-                return Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
-        tech.sort((o1, o2) -> {
-            if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            } else {
-                return Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
-        toys.sort((o1, o2) -> {
-            if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            } else {
-                return Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
+        boardGames.sort(this::sortPrices);
+        books.sort(this::sortPrices);
+        clothes.sort(this::sortPrices);
+        sweets.sort(this::sortPrices);
+        tech.sort(this::sortPrices);
+        toys.sort(this::sortPrices);
     }
 
-    public List<Gift> getSpecifiedList(Category category) {
+    /**
+     * Method returns the corresponding list based on category
+     * @param category gift category of the list we want
+     * @return list with gifts with specified category
+     */
+    public List<Gift> getSpecifiedList(final Category category) {
         switch (category) {
             case BOARD_GAMES -> {
                 return boardGames;
@@ -104,15 +76,25 @@ public class GiftList {
             case SWEETS -> {
                 return sweets;
             }
+            default -> {
+                return null;
+            }
         }
-        return null;
+    }
+
+    private Integer sortPrices(final Gift o1, final Gift o2) {
+        if (o1.getPrice().compareTo(o2.getPrice()) > 0) {
+            return Double.compare(o1.getPrice(), o2.getPrice());
+        } else {
+            return Double.compare(o2.getPrice(), o1.getPrice());
+        }
     }
 
     public List<Gift> getBoardGames() {
         return boardGames;
     }
 
-    public void setBoardGames(List<Gift> boardGames) {
+    public void setBoardGames(final List<Gift> boardGames) {
         this.boardGames = boardGames;
     }
 
@@ -120,7 +102,7 @@ public class GiftList {
         return books;
     }
 
-    public void setBooks(List<Gift> books) {
+    public void setBooks(final List<Gift> books) {
         this.books = books;
     }
 
@@ -128,7 +110,7 @@ public class GiftList {
         return clothes;
     }
 
-    public void setClothes(List<Gift> clothes) {
+    public void setClothes(final List<Gift> clothes) {
         this.clothes = clothes;
     }
 
@@ -136,7 +118,7 @@ public class GiftList {
         return sweets;
     }
 
-    public void setSweets(List<Gift> sweets) {
+    public void setSweets(final List<Gift> sweets) {
         this.sweets = sweets;
     }
 
@@ -144,7 +126,7 @@ public class GiftList {
         return tech;
     }
 
-    public void setTech(List<Gift> tech) {
+    public void setTech(final List<Gift> tech) {
         this.tech = tech;
     }
 
@@ -152,7 +134,7 @@ public class GiftList {
         return toys;
     }
 
-    public void setToys(List<Gift> toys) {
+    public void setToys(final List<Gift> toys) {
         this.toys = toys;
     }
 }

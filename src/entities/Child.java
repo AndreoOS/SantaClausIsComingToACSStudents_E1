@@ -1,6 +1,6 @@
 package entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import common.Constants;
 import enums.AgeCategory;
 import enums.Category;
 import enums.Cities;
@@ -8,7 +8,7 @@ import enums.Cities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Child {
+public final class Child {
     private Integer id;
     private String lastName;
     private String firstName;
@@ -28,8 +28,9 @@ public class Child {
         this.receivedGifts = new ArrayList<>();
     }
 
-    public Child(Integer id, String firstName, String lastName, Integer age, Cities city,
-                 Double niceScore, List<Category> giftsPreferences) {
+    public Child(final Integer id, final String firstName, final String lastName,
+                 final Integer age, final Cities city,
+                 final Double niceScore,  final List<Category> giftsPreferences) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,12 +44,15 @@ public class Child {
         return ageCategory;
     }
 
+    /**
+     * Method sets the age category of child
+     */
     public void setAgeCategory() {
-        if (age < 5) {
+        if (age < Constants.MAX_BABY_AGE) {
             this.ageCategory = AgeCategory.BABY;
-        } else if (age < 12) {
+        } else if (age < Constants.MAX_KID_AGE) {
             this.ageCategory = AgeCategory.KID;
-        } else if (age <= 18) {
+        } else if (age <= Constants.MAX_TEEN_AGE) {
             this.ageCategory = AgeCategory.TEEN;
         } else {
             this.ageCategory = AgeCategory.YOUNG_ADULT;
@@ -59,7 +63,7 @@ public class Child {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -67,7 +71,7 @@ public class Child {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -75,7 +79,7 @@ public class Child {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -83,7 +87,7 @@ public class Child {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(final Integer age) {
         this.age = age;
     }
 
@@ -91,7 +95,7 @@ public class Child {
         return city;
     }
 
-    public void setCity(Cities city) {
+    public void setCity(final Cities city) {
         this.city = city;
     }
 
@@ -99,7 +103,7 @@ public class Child {
         return niceScore;
     }
 
-    public void setNiceScore(Double niceScore) {
+    public void setNiceScore(final Double niceScore) {
         this.niceScore = niceScore;
     }
 
@@ -107,7 +111,7 @@ public class Child {
         return giftsPreferences;
     }
 
-    public void setGiftsPreferences(List<Category> giftsPreferences) {
+    public void setGiftsPreferences(final List<Category> giftsPreferences) {
         this.giftsPreferences = giftsPreferences;
     }
 
@@ -115,7 +119,7 @@ public class Child {
         return assignedBudget;
     }
 
-    public void setAssignedBudget(Double assignedBudget) {
+    public void setAssignedBudget(final Double assignedBudget) {
         this.assignedBudget = assignedBudget;
     }
 
@@ -123,7 +127,7 @@ public class Child {
         return receivedGifts;
     }
 
-    public void setReceivedGifts(List<Gift> receivedGifts) {
+    public void setReceivedGifts(final List<Gift> receivedGifts) {
         this.receivedGifts = receivedGifts;
     }
 
@@ -131,7 +135,7 @@ public class Child {
         return averageScore;
     }
 
-    public void setAverageScore(Double averageScore) {
+    public void setAverageScore(final Double averageScore) {
         this.averageScore = averageScore;
     }
 
@@ -139,7 +143,7 @@ public class Child {
         return niceScoreHistory;
     }
 
-    public void setNiceScoreHistory(List<Double> niceScoreHistory) {
+    public void setNiceScoreHistory(final List<Double> niceScoreHistory) {
         this.niceScoreHistory = niceScoreHistory;
     }
 
