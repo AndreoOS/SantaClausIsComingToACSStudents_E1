@@ -1,2 +1,5 @@
 Starting audit...
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\entities\Child.java:47:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\andre\Desktop\Cursuri\Anul II Sem 1\POO\POO_Proiect_Etapa1\.\src\factory\CalculateScoreStrategyFactory.java:14:5: Missing a Javadoc comment. [MissingJavadocMethod]
 Audit done.
+Checkstyle ends with 2 errors.

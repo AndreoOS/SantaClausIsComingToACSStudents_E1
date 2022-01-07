@@ -1,6 +1,7 @@
 package main;
 
 import checker.Checker;
+import dataprocessing.DataManagement;
 
 /**
  * Class used to run the code
@@ -16,6 +17,8 @@ public final class Main {
      *          the arguments used to call the main method
      */
     public static void main(final String[] args) {
+        DataManagement dm = new DataManagement();
+        dm.readAllDataAndSimulate();
         Checker.calculateScore();
     }
 }
